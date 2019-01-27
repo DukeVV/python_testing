@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from selenium import webdriver
 import unittest
-from contact import Contact
+from model.contact import Contact
 
 
 class TestAddContact(unittest.TestCase):
@@ -11,12 +11,12 @@ class TestAddContact(unittest.TestCase):
 
     def test_untitled_test_case(self):
         wd = self.wd
-        self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
         self.create_new_contact(wd, Contact(firstname="Ivan", middlename="Ivanovich", lastname="Ivanov"))
         self.logout(wd)
 
     def create_new_contact(self, wd, contact):
+        wd = self.wd
         wd.find_element_by_link_text("add new").click()
         # fill name
         wd.find_element_by_name("firstname").click()
@@ -26,14 +26,16 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("middlename").send_keys(contact.middlename)
         wd.find_element_by_name("lastname").clear()
         wd.find_element_by_name("lastname").send_keys(contact.lastname)
-
         # input data base
         wd.find_element_by_xpath("//input[21]").click()
 
     def logout(self, wd):
+        wd = self.wd
         wd.find_element_by_link_text("Logout").click()
 
     def login(self, wd, username, password):
+        wd = self.wd
+        self.open_home_page(wd)
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
         wd.find_element_by_name("pass").clear()
@@ -41,6 +43,7 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_xpath("//input[@value='Login']").click()
 
     def open_home_page(self, wd):
+        wd = self.wd
         wd.get("http://localhost/addressbook/")
 
 
