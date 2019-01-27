@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-
 from selenium import webdriver
 import unittest
 from group import Group
-
 
 class TestAddGroup(unittest.TestCase):
     def setUp(self):
@@ -13,31 +11,25 @@ class TestAddGroup(unittest.TestCase):
     def test_add_group(self):
         wd = self.wd
         self.open_home_page(wd)
-        self.login(wd, username="admin", password="secret")
+        self.login(wd, "admin", "secret")
         self.open_group_page(wd)
-        self.create(wd, Group(name="test1", header="test, test, test", footer="test"))
-        self.return_to_group_page(wd)
+        self.create_group(wd, Group(name="test1", header="test, test, test", footer="test"))
+        self.return_to_groups_page(wd)
         self.logout(wd)
 
     def test_add_empty_group(self):
         wd = self.wd
         self.open_home_page(wd)
-        self.login(wd, username="admin", password="secret")
+        self.login(wd, "admin", "secret")
         self.open_group_page(wd)
-        self.create(wd, Group(name="", header="", footer=""))
-        self.return_to_group_page(wd)
+        self.create_group(wd, Group("test1", "test, test, test", "test"))
+        self.return_to_groups_page(wd)
         self.logout(wd)
 
-    def logout(self, wd):
-        wd.find_element_by_link_text("Logout").click()
-
-    def return_to_group_page(self, wd):
-        wd.find_element_by_link_text("group page").click()
-
-    def create(self, wd, group):
+    def create_group(self, wd, group):
         # init group creation
         wd.find_element_by_name("new").click()
-        # fill group firm
+        # fill group form
         wd.find_element_by_name("group_name").click()
         wd.find_element_by_name("group_name").clear()
         wd.find_element_by_name("group_name").send_keys(group.name)
@@ -49,6 +41,12 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element_by_name("group_footer").send_keys(group.footer)
         # submit group creation
         wd.find_element_by_name("submit").click()
+
+    def return_to_groups_page(self, wd):
+        wd.find_element_by_link_text("group page").click()
+
+    def logout(self, wd):
+        wd.find_element_by_link_text("Logout").click()
 
     def open_group_page(self, wd):
         wd.find_element_by_link_text("groups").click()
