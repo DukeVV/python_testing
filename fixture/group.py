@@ -1,3 +1,5 @@
+from model.group import Group
+
 
 class GroupHelper:
 
@@ -62,3 +64,14 @@ class GroupHelper:
         self.fill_group_form(new_group_data)
         self.update_edit()
         self.return_to_groups_page()
+
+    def count(self):
+        wd = self.app.wd
+        self.open_group_page()
+        return len(wd.find_elements_by_name("selected[]"))
+
+    def check_group(self):
+        wd = self.app.wd
+        if self.count() == 0:
+            self.create(Group(name="test5", header="Header", footer="test, test, test"))
+        pass

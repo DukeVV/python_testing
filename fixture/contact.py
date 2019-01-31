@@ -1,3 +1,5 @@
+from model.contact import Contact
+
 
 class ContactHelper:
 
@@ -43,3 +45,15 @@ class ContactHelper:
         # input data base
         wd.find_element_by_name("update").click()
         wd.find_element_by_link_text("home page").click()
+
+    def count(self):
+        wd = self.app.wd
+        self.app.open_home_page()
+        return len(wd.find_elements_by_name("selected[]"))
+
+    def check_contact(self):
+        wd = self.app.wd
+        if self.count() == 0:
+            self.create_new(Contact(firstname="Ivan", middlename="Ivanovich", lastname="Ivanov"))
+        pass
+
