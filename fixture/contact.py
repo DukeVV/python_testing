@@ -55,5 +55,5 @@ class ContactHelper:
         wd = self.app.wd
         if self.count() == 0:
             self.create_new(Contact(firstname="Ivan", middlename="Ivanovich", lastname="Ivanov"))
-        pass
+
 
