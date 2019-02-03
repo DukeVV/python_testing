@@ -60,10 +60,10 @@ class ContactHelper:
         wd = self.app.wd
         self.app.open_home_page()
         contacts = []
-        for element in wd.find_elements_by_css_selector("td.center"):
+        for element in wd.find_elements_by_name("entry"):
             text = element.text
             id = element.find_element_by_name("selected[]"). get_attribute("value")
-            contacts.append(Contact(firstname=text, id=id))
+            contacts.append(Contact(lastname=text, id=id))
         return contacts
 
 
