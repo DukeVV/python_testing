@@ -56,4 +56,14 @@ class ContactHelper:
         if self.count() == 0:
             self.create_new(Contact(firstname="Ivan", middlename="Ivanovich", lastname="Ivanov"))
 
+    def get_contact_list(self):
+        wd = self.app.wd
+        self.app.open_home_page()
+        contacts = []
+        for element in wd.find_elements_by_css_selector("td.center"):
+            text = element.text
+            id = element.find_element_by_name("selected[]"). get_attribute("value")
+            contacts.append(Contact(firstname=text, id=id))
+        return contacts
+
 
