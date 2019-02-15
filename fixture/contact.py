@@ -1,6 +1,6 @@
 
 from model.contact import Contact
-import  re
+import re
 
 
 class ContactHelper:
@@ -83,10 +83,9 @@ class ContactHelper:
                 text = cells[1].text
                 text2 = cells[2].text
                 id = element.find_element_by_name("selected[]"). get_attribute("value")
-                all_phones = cells[5].text.splitlines()
+                all_phones = cells[5].text
                 self.contact_cache.append(Contact(lastname=text, firstname=text2, id=id,
-                                                  homephone=all_phones[0], mobilephone=all_phones[1],
-                                                  workphone=all_phones[2], secondaryphone=all_phones[3]))
+                                                  all_phones_from_home_page=all_phones))
         return list(self.contact_cache)
 
     def open_contact_to_edit_by_index(self, index):
@@ -121,8 +120,8 @@ class ContactHelper:
         self.open_contact_view_by_index(index)
         text = wd.find_element_by_id("content").text
         homephone = re.search("H: (.*)", text).group(1)
-        workphone = re.search("W: (.*)", text).group(1)
         mobilephone = re.search("M: (.*)", text).group(1)
+        workphone = re.search("W: (.*)", text).group(1)
         secondaryphone = re.search("P: (.*)", text).group(1)
         return Contact(homephone=homephone, mobilephone=mobilephone, workphone=workphone, secondaryphone=secondaryphone)
 
