@@ -6,13 +6,13 @@ import string
 
 
 def random_string_for_name_and_address(prefix, maxlen):
-    symbols = string.ascii_letters + string.punctuation + " "
+    symbols = string.ascii_letters + string.punctuation + " "*10
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 
-def random_string_for_phones(prefix, maxlen):
+def random_string_for_phones(maxlen):
     symbols = string.digits + string.punctuation + " "
-    return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
+    return "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 
 def random_string_for_email(prefix, maxlen):
@@ -26,10 +26,10 @@ testdata = [Contact(firstname="", middlename="", lastname="", address="", homeph
                                                       middlename=random_string_for_name_and_address("middlename", 10),
                                                       lastname=random_string_for_name_and_address("lastname", 10),
                                                       address=random_string_for_name_and_address("address", 20),
-                                                      homephone=random_string_for_phones("homephone", 12),
-                                                      mobilephone=random_string_for_phones("mobilephone", 12),
-                                                      workphone=random_string_for_phones("workphone", 12),
-                                                      secondaryphone=random_string_for_phones("secondaryphone", 12),
+                                                      homephone=random_string_for_phones(12),
+                                                      mobilephone=random_string_for_phones(12),
+                                                      workphone=random_string_for_phones(12),
+                                                      secondaryphone=random_string_for_phones(12),
                                                       email=random_string_for_email("email", 20),
                                                       email2=random_string_for_email("email2", 20),
                                                       email3=random_string_for_email("email3", 20))
