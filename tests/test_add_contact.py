@@ -6,12 +6,12 @@ import string
 
 
 def random_string_for_name_and_address(prefix, maxlen):
-    symbols = string.ascii_letters + string.punctuation + " "*10
+    symbols = string.ascii_letters + string.punctuation + " "*4
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 
 def random_string_for_phones(maxlen):
-    symbols = string.digits + string.punctuation + " "
+    symbols = string.digits + " " + "-"
     return "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 
