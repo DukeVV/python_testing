@@ -1,7 +1,7 @@
 from model.contact import Contact
 
 
-constant = [Contact(firstname="Ivan", middlename="Ivanovich", lastname="Ivanov", address="17. Lesnaia str. Moscow",
+testdata = [Contact(firstname="Ivan", middlename="Ivanovich", lastname="Ivanov", address="17. Lesnaia str. Moscow",
                     homephone="(495)-555-66-77", mobilephone="8-(915)-222-33-44", workphone="3335544",
                     secondaryphone="", email="email@rr.com", email2="email2@rr.com", email3="email3@rr.com"),
             Contact(firstname="Sergei", middlename="Sergeevich", lastname="Sergeev", address="178. Lenin str. Omsk",
